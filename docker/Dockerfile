@@ -1,4 +1,4 @@
-FROM node:lts-alpine
+FROM node:15.9.0-alpine3.12
 ARG REPO=gitee
 ARG REPO_URL=$REPO.com
 ARG JD_SHELL=jd_shell
@@ -27,7 +27,6 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     && apk --no-cache add -f bash \
                              coreutils \
                              moreutils \
-                             coreutils \
                              git \
                              wget \
                              curl \
@@ -35,7 +34,6 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
                              tzdata \
                              perl \
                              openssh-client \
-                             openssh \
                              openssl \
     && rm -rf /var/cache/apk/* \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
