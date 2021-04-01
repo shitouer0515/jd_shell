@@ -20,7 +20,7 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     ENABLE_RESET_REPO_URL=true \
     JD_SHELL_URL=git@$JD_SHELL_HOST:dockere/$JD_SHELL.git \
     JD_SCRIPTS_URL=git@$JD_SCRIPTS_HOST:lxk0301/$JD_SCRIPTS.git
-WORKDIR $JD_DIR
+WORKDIR ${JD_DIR}
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
     && apk update -f \
     && apk upgrade \
@@ -64,5 +64,6 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     && cp -f $JD_DIR/docker/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh \
     && chmod 777 /usr/local/bin/docker-entrypoint.sh \
     && chmod 777 $JD_DIR/*.sh \
+    && chmod 777 /usr/local/bin/* \
     && rm -rf /root/.npm
 ENTRYPOINT ["docker-entrypoint.sh"]
